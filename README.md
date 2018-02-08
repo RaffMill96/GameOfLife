@@ -5,6 +5,3 @@
 
 - Created: 02.05.2018
 - By : Rafael Millan
-
-eder eder eder eder eder eder eder eder eder eder
-    
