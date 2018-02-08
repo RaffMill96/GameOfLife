@@ -1,26 +1,10 @@
-import processing.core.*; 
-import processing.data.*; 
-import processing.event.*; 
-import processing.opengl.*; 
-
-import java.util.HashMap; 
-import java.util.ArrayList; 
-import java.io.File; 
-import java.io.BufferedReader; 
-import java.io.PrintWriter; 
-import java.io.InputStream; 
-import java.io.OutputStream; 
-import java.io.IOException; 
-
-public class GameOfLife extends PApplet {
-
 //Game of Life
 int[][] cells;
 int[][] cellsBuffer;
 int cellSize = 10;
 
-int dead = color(0);
-int alive = color(200,0,100);
+color dead = color(0);
+color alive = color(200,0,100);
 
 int interval = 100;
 int lastRecTime = 0;
@@ -28,28 +12,28 @@ int lastRecTime = 0;
 boolean pause = true;
 float state;
 
-public void setup()
+void setup()
 {
-  
+  size(1200, 700);
   
   cells = new int[width/cellSize][height/cellSize];
   cellsBuffer = new int[width/cellSize][height/cellSize];
 
   stroke(40);
-  
+  noSmooth();
   
   for(int x = 0; x < width/cellSize; x++)
   {
     for(int y = 0; y < height/cellSize; y++)
     {
       state = 0;
-      cells[x][y] = PApplet.parseInt(state);
+      cells[x][y] = int(state);
     }
   }
   background(0);
 }
 
-public void draw()
+void draw()
 {
   for (int x=0; x<width/cellSize; x++) 
   {
@@ -75,9 +59,9 @@ public void draw()
   
   if(pause && mousePressed)
   {
-      int xCellOver = PApplet.parseInt(map(mouseX, 0, width, 0, width/cellSize));
+      int xCellOver = int(map(mouseX, 0, width, 0, width/cellSize));
     xCellOver = constrain(xCellOver, 0, width/cellSize-1);
-    int yCellOver = PApplet.parseInt(map(mouseY, 0, height, 0, height/cellSize));
+    int yCellOver = int(map(mouseY, 0, height, 0, height/cellSize));
     yCellOver = constrain(yCellOver, 0, height/cellSize-1);
 
     // Check against cells in buffer
@@ -100,7 +84,7 @@ public void draw()
   }
 }//End of draw.
   
-public void iteration() 
+void iteration() 
 { 
   
  for (int x=0; x<width/cellSize; x++) 
@@ -155,7 +139,7 @@ public void iteration()
  } 
 }//END of iterate;
 
-public void keyPressed()
+void keyPressed()
 {
   if(key == ' ') // Pause
   {
@@ -167,7 +151,7 @@ public void keyPressed()
     for (int x=0; x<width/cellSize; x++) {
       for (int y=0; y<height/cellSize; y++) {
         state = 0;
-        cells[x][y] = PApplet.parseInt(state); // Save state of each cell
+        cells[x][y] = int(state); // Save state of each cell
       }
     }
   }
@@ -186,21 +170,11 @@ public void keyPressed()
         {
            state = 1; 
         }
-        cells[x][y] = PApplet.parseInt(state); // Save state of each cell
+        cells[x][y] = int(state); // Save state of each cell
         
       }
     }
     pause = true;
   }
   
-}
-  public void settings() {  size(1200, 700);  noSmooth(); }
-  static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "GameOfLife" };
-    if (passedArgs != null) {
-      PApplet.main(concat(appletArgs, passedArgs));
-    } else {
-      PApplet.main(appletArgs);
-    }
-  }
 }
