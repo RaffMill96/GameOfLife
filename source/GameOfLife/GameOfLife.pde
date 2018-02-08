@@ -6,8 +6,6 @@ int cellSize = 10;
 color dead = color(0);
 color alive = color(200,0,100);
 
-float pAlive = 15;
-
 int interval = 100;
 int lastRecTime = 0;
 
@@ -16,7 +14,7 @@ float state;
 
 void setup()
 {
-  size(1000, 700);
+  size(1200, 700);
   
   cells = new int[width/cellSize][height/cellSize];
   cellsBuffer = new int[width/cellSize][height/cellSize];
@@ -143,9 +141,40 @@ void iteration()
 
 void keyPressed()
 {
-  if(key == ' ')
+  if(key == ' ') // Pause
   {
     pause = !pause;
+  }
+  
+  if(key == 'c' || key == 'C') // Clear all cells
+  {
+    for (int x=0; x<width/cellSize; x++) {
+      for (int y=0; y<height/cellSize; y++) {
+        state = 0;
+        cells[x][y] = int(state); // Save state of each cell
+      }
+    }
+  }
+  
+  if(key == 'r' || key == 'R')
+  {
+    for (int x=0; x<width/cellSize; x++) {
+      for (int y=0; y<height/cellSize; y++) {
+        float rand = random(100);
+        int prob = 15;
+        if(rand > prob)
+        {
+          state = 0;
+        }
+        if(rand <= prob)
+        {
+           state = 1; 
+        }
+        cells[x][y] = int(state); // Save state of each cell
+        
+      }
+    }
+    pause = true;
   }
   
 }
