@@ -1,10 +1,13 @@
 //Game of Life
 int[][] cells;
 int[][] cellsBuffer;
-int cellSize = 10;
+int cellSize = 5;
+int gen = 0;
 
 color dead = color(0);
 color alive = color(200,0,100);
+
+PFont genTxt;
 
 int interval = 100;
 int lastRecTime = 0;
@@ -22,6 +25,8 @@ void setup()
   stroke(40);
   noSmooth();
   
+  genTxt = createFont("Arial", 15, true); // Arial, 30 point, anti-aliasing on
+ 
   for(int x = 0; x < width/cellSize; x++)
   {
     for(int y = 0; y < height/cellSize; y++)
@@ -37,7 +42,7 @@ void draw()
 {
   for (int x=0; x<width/cellSize; x++) 
   {
-    for (int y=0; y<height/cellSize; y++) 
+    for (int y=0; y<height/cellSize; y++)   
     {
       if (cells[x][y]==1) {
         fill(alive); // Color alive
@@ -53,7 +58,20 @@ void draw()
     if (!pause) 
     {
       iteration();
+      gen++;
+      //println(gen);
+      
+      textFont(genTxt, 15);
+      fill(255);
+      text("Generation: " +gen, 10, 20);
+    
       lastRecTime = millis()*4;
+    }
+    else 
+    {
+      textFont(genTxt, 15);
+      fill(255);
+      text("Generation: " + gen, 10, 20);
     }
   }
   
@@ -148,6 +166,7 @@ void keyPressed()
   
   if(key == 'c' || key == 'C') // Clear all cells
   {
+    gen = 0;
     for (int x=0; x<width/cellSize; x++) {
       for (int y=0; y<height/cellSize; y++) {
         state = 0;
@@ -157,7 +176,8 @@ void keyPressed()
   }
   
   if(key == 'r' || key == 'R')
-  {
+  { 
+    gen = 0;
     for (int x=0; x<width/cellSize; x++) {
       for (int y=0; y<height/cellSize; y++) {
         float rand = random(100);

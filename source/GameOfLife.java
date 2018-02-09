@@ -17,10 +17,13 @@ public class GameOfLife extends PApplet {
 //Game of Life
 int[][] cells;
 int[][] cellsBuffer;
-int cellSize = 10;
+int cellSize = 5;
+int gen = 0;
 
 int dead = color(0);
 int alive = color(200,0,100);
+
+PFont genTxt;
 
 int interval = 100;
 int lastRecTime = 0;
@@ -38,6 +41,8 @@ public void setup()
   stroke(40);
   
   
+  genTxt = createFont("Arial", 15, true); // Arial, 30 point, anti-aliasing on
+ 
   for(int x = 0; x < width/cellSize; x++)
   {
     for(int y = 0; y < height/cellSize; y++)
@@ -53,7 +58,7 @@ public void draw()
 {
   for (int x=0; x<width/cellSize; x++) 
   {
-    for (int y=0; y<height/cellSize; y++) 
+    for (int y=0; y<height/cellSize; y++)   
     {
       if (cells[x][y]==1) {
         fill(alive); // Color alive
@@ -69,7 +74,20 @@ public void draw()
     if (!pause) 
     {
       iteration();
+      gen++;
+      //println(gen);
+      
+      textFont(genTxt, 15);
+      fill(255);
+      text("Generation: " +gen, 10, 20);
+    
       lastRecTime = millis()*4;
+    }
+    else 
+    {
+      textFont(genTxt, 15);
+      fill(255);
+      text("Generation: " + gen, 10, 20);
     }
   }
   
@@ -164,6 +182,7 @@ public void keyPressed()
   
   if(key == 'c' || key == 'C') // Clear all cells
   {
+    gen = 0;
     for (int x=0; x<width/cellSize; x++) {
       for (int y=0; y<height/cellSize; y++) {
         state = 0;
@@ -173,7 +192,8 @@ public void keyPressed()
   }
   
   if(key == 'r' || key == 'R')
-  {
+  { 
+    gen = 0;
     for (int x=0; x<width/cellSize; x++) {
       for (int y=0; y<height/cellSize; y++) {
         float rand = random(100);
