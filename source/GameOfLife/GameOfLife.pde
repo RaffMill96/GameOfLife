@@ -173,6 +173,7 @@ void keyPressed()
         cells[x][y] = int(state); // Save state of each cell
       }
     }
+    pause = true;
   }
   
   if(key == 'r' || key == 'R')

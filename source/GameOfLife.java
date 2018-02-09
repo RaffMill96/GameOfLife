@@ -189,6 +189,7 @@ public void keyPressed()
         cells[x][y] = PApplet.parseInt(state); // Save state of each cell
       }
     }
+    pause = true;
   }
   
   if(key == 'r' || key == 'R')
