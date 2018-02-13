@@ -1,5 +1,6 @@
 # GameOfLife
-              ver. 2.1
+
+ver. 2.1
               
 *Based on - JOHN CONWAY'S "GAME OF LIFE"*
 
@@ -8,7 +9,8 @@
 
 # Changelog 
 
- ver. 2.0:
-        Added Generation counter.
  ver. 2.1:
         Iteration pauses when grid is cleared.
+        
+ ver. 2.0:
+        Added Generation counter.
