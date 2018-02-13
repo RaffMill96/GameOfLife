@@ -1,5 +1,4 @@
 # GameOfLife
-***********| Game of Life |**********
               ver. 2.1
               
 *Based on - JOHN CONWAY'S "GAME OF LIFE"*
